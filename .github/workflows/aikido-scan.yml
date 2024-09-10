@@ -1,0 +1,15 @@
+on: workflow_dispatch
+
+name: Aikido Scan Dockerized
+jobs:
+  aikido-local-scan-repo:
+    runs-on: ubuntu-latest
+    container:
+      image: aikidosecurity/local-scanner:latest
+    steps: 
+      - uses: actions/checkout@v4 
+        with: 
+          token: ${{ secrets.GITHUB_TOKEN }} 
+          path: terragoat
+      - name: Run scan
+        run: aikido-local-scanner scan terragoat --repositoryname terragoat --branchname main --apikey AIK_CI_DrG6aROVnhqhFpznN0sldqgYYC2bFr1TjaRVpasaZwx2z0isQnI75SgUk75DfkvS
